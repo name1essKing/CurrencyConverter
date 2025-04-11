@@ -1,0 +1,110 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:CurrencyConverter.Client.ViewModels"
+             x:Class="CurrencyConverter.Client.Views.CurrencyConverterView"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="150">
+
+
+
+    <Grid ColumnDefinitions="*,*"
+          RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+          Margin="10">
+
+        <!-- Левая панель валют -->
+        <Grid ColumnDefinitions="*,*,*"
+              Grid.Column="0"
+              Grid.Row="0"
+              Margin="2">
+
+            <!-- Все кнопки левой панели привязаны к SetLeftCurrency -->
+            <Button Grid.Column="0"
+                    Content="RUR"
+                    Command="{Binding Commands.SetLeftCurrency}"
+                    CommandParameter="RUR"
+                    HorizontalAlignment="Stretch"/>
+
+            <Button Grid.Column="1"
+                    Content="USD"
+                    Command="{Binding Commands.SetLeftCurrency}"
+                    CommandParameter="USD"
+                    HorizontalAlignment="Stretch"/>
+
+            <Button Grid.Column="2"
+                    Content="EUR"
+                    Command="{Binding Commands.SetLeftCurrency}"
+                    CommandParameter="EUR"
+                    HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <!-- Правая панель валют -->
+        <Grid ColumnDefinitions="*,*,*"
+              Grid.Column="1"
+              Grid.Row="0"
+              Margin="2">
+
+            <!-- Все кнопки правой панели привязаны к SetRightCurrency -->
+            <Button Grid.Column="0"
+                    Content="RUR"
+                    Command="{Binding Commands.SetRightCurrency}"
+                    CommandParameter="RUR"
+                    HorizontalAlignment="Stretch"/>
+
+            <Button Grid.Column="1"
+                    Content="USD"
+                    Command="{Binding Commands.SetRightCurrency}"
+                    CommandParameter="USD"
+                    HorizontalAlignment="Stretch"/>
+
+            <Button Grid.Column="2"
+                    Content="EUR"
+                    Command="{Binding Commands.SetRightCurrency}"
+                    CommandParameter="EUR"
+                    HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <!-- Заголовки -->
+        <TextBlock Grid.Column="0"
+                  Grid.Row="1"
+                  Text="У меня есть"
+                  FontSize="20"
+                  TextAlignment="Center"/>
+
+        <TextBlock Grid.Column="1"
+                  Grid.Row="1"
+                  Text="Хочу приобрести"
+                  FontSize="20"
+                  TextAlignment="Center"/>
+
+        <!-- Блок с полями ввода -->
+        <Grid Grid.ColumnSpan="2"
+              Grid.Row="2"
+              ColumnDefinitions="*,150,*">
+
+            <!-- Привязка к LeftValue с TwoWay-режимом -->
+            <TextBox Grid.Column="0"
+                    Text="{Binding LeftValue, Mode=TwoWay}"
+                    Watermark="Введите сумму"
+                    TextAlignment="Right"/>
+
+            <!-- Привязка к RightValue -->
+            <TextBox Grid.Column="2"
+                    Text="{Binding RightValue}"
+                    Watermark="Результат"
+                    TextAlignment="Left"/>
+
+            <!-- Кнопка обмена валют -->
+            <Button Grid.Column="1"
+                    Command="{Binding Commands.Swap}"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Content=" ⇆"
+                    FontSize="40"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"/>
+        </Grid>
+    </Grid>
+</UserControl>
